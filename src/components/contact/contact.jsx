@@ -1,8 +1,11 @@
 import s from './contact.module.css';
 import { FaMobileScreenButton } from 'react-icons/fa6';
 import { FaRegFaceSmile } from 'react-icons/fa6';
+import { useDispatch } from 'react-redux';
+import { deleteContact } from '../../redux/contactsslice';
 
-export default function Contact({ name, phone, id, onDelete }) {
+export default function Contact({ name, phone, id }) {
+  const dispatch = useDispatch();
   return (
     <div className={s.contact_card}>
       <p>
@@ -13,12 +16,7 @@ export default function Contact({ name, phone, id, onDelete }) {
         <FaMobileScreenButton size={'12px'} />
         &nbsp;{phone}
       </p>
-      <button
-        onClick={() => {
-          onDelete(id);
-        }}>
-        Delete
-      </button>
+      <button onClick={() => dispatch(deleteContact(id))}>Delete</button>
     </div>
   );
 }
